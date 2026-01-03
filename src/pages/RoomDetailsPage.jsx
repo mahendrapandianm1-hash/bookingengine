@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import RoomCard from "../components/RoomCard"; // Your reusable card component
-import "react-image-lightbox/style.css";
-import Lightbox from "react-image-lightbox";
-import {useNavigate} from 'react-router-dom';
+import RoomCard from "../components/RoomCard";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { useNavigate } from "react-router-dom";
 
 const room = {
   title: "Deluxe Room",
@@ -30,7 +30,6 @@ const otherRooms = [
     guests: 4,
     bed: "King + Sofa",
     price: 7500,
-    badge: "",
     view: "City View",
   },
   {
@@ -39,7 +38,6 @@ const otherRooms = [
     guests: 4,
     bed: "King + Bunk",
     price: 6000,
-    badge: "",
     view: "City View",
   },
   {
@@ -48,42 +46,42 @@ const otherRooms = [
     guests: 2,
     bed: "Queen",
     price: 3500,
-    badge: "Recommended",
     view: "Ocean View",
   },
 ];
 
 export default function RoomDetailsPage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
+  const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState(0);
   const navigate = useNavigate();
-  const handleBookNow = () =>
-  {
-    navigate('/room-book'); 
-  }    
+
+  const handleBookNow = () => {
+    navigate("/room-book");
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
-      {/* Hero Image */}
+      {/* HERO */}
       <div className="w-full h-96 md:h-[500px] relative">
         <img
           src={room.gallery[0]}
           alt={room.title}
           className="w-full h-full object-cover cursor-pointer"
           onClick={() => {
-            setIsOpen(true);
-            setPhotoIndex(0);
+            setIndex(0);
+            setOpen(true);
           }}
         />
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h1 className="text-white text-3xl md:text-5xl font-playfair font-semibold">
+          <h1 className="text-white text-3xl md:text-5xl font-semibold">
             {room.title}
           </h1>
         </div>
       </div>
 
-      {/* Room Info */}
+      {/* DETAILS */}
       <div className="max-w-5xl mx-auto px-6 md:px-16 py-10 flex flex-col md:flex-row gap-10">
-        {/* Left Details */}
+        {/* LEFT */}
         <div className="flex-1 flex flex-col gap-6">
           <h2 className="text-2xl font-semibold">{room.title}</h2>
           <p className="text-gray-600">{room.description}</p>
@@ -95,60 +93,67 @@ export default function RoomDetailsPage() {
             </span>
           </div>
 
-          {/* Amenities */}
+          {/* AMENITIES */}
           <div>
             <h3 className="font-semibold mb-2">Amenities</h3>
             <ul className="flex flex-wrap gap-3">
-              {room.amenities.map((amenity, i) => (
+              {room.amenities.map((a, i) => (
                 <li
                   key={i}
                   className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm"
                 >
-                  {amenity}
+                  {a}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Book Now */}
-          <button onClick={handleBookNow} className="mt-6 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-900 transition">
+          <button
+            onClick={handleBookNow}
+            className="mt-6 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-900 transition"
+          >
             Book Now
           </button>
         </div>
-{/* Right Gallery */}
-<div className="flex-1 flex flex-col gap-4">
-  {room.gallery.slice(1, 3).map((img, i) => {
-    const isLastVisible = i === 1 && room.gallery.length > 2; // last image visible
-    const remainingCount = room.gallery.length - 2; // remaining images
 
-    return (
-      <div key={i} className="relative group">
-        <img
-          src={img}
-          alt={`Gallery ${i + 1}`}
-          className="w-full h-48 object-cover rounded-2xl cursor-pointer transform transition-transform duration-300 group-hover:scale-105"
-          onClick={() => {
-            setIsOpen(true);
-            setPhotoIndex(i + 1);
-          }}
-        />
+        {/* RIGHT GALLERY */}
+        <div className="flex-1 flex flex-col gap-4">
+          {room.gallery.slice(1, 3).map((img, i) => {
+            const remaining = room.gallery.length - 2;
+            const isLast = i === 1 && remaining > 0;
 
-        {/* Overlay for remaining images */}
-        {isLastVisible && (
-          <div onClick={()=>{setIsOpen(true);setPhotoIndex(i + 1);}} className="absolute inset-0 bg-black/60 flex items-center cursor-pointer transform transition-transform  justify-center rounded-2xl text-white text-3xl font-bold">
-            +{remainingCount}
-          </div>
-        )}
+            return (
+              <div key={i} className="relative">
+                <img
+                  src={img}
+                  alt=""
+                  className="w-full h-48 object-cover rounded-2xl cursor-pointer"
+                  onClick={() => {
+                    setIndex(i + 1);
+                    setOpen(true);
+                  }}
+                />
+
+                {isLast && (
+                  <div
+                    onClick={() => {
+                      setIndex(i + 1);
+                      setOpen(true);
+                    }}
+                    className="absolute inset-0 bg-black/60 flex items-center justify-center rounded-2xl text-white text-3xl font-bold cursor-pointer"
+                  >
+                    +{remaining}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
-    );
-  })}
-</div>
 
-      </div>
-
-      {/* Other Rooms */}
+      {/* OTHER ROOMS */}
       <div className="max-w-6xl mx-auto px-6 md:px-16 py-16">
-        <h2 className="text-3xl font-playfair font-semibold mb-8 text-center">
+        <h2 className="text-3xl font-semibold mb-8 text-center">
           Other Room Types
         </h2>
 
@@ -159,27 +164,13 @@ export default function RoomDetailsPage() {
         </div>
       </div>
 
-      {/* Lightbox */}
-      {isOpen && (
-        <Lightbox
-          mainSrc={room.gallery[photoIndex]}
-          nextSrc={room.gallery[(photoIndex + 1) % room.gallery.length]}
-          prevSrc={
-            room.gallery[
-              (photoIndex + room.gallery.length - 1) % room.gallery.length
-            ]
-          }
-          onCloseRequest={() => setIsOpen(false)}
-          onMovePrevRequest={() =>
-            setPhotoIndex(
-              (photoIndex + room.gallery.length - 1) % room.gallery.length
-            )
-          }
-          onMoveNextRequest={() =>
-            setPhotoIndex((photoIndex + 1) % room.gallery.length)
-          }
-        />
-      )}
+      {/* LIGHTBOX */}
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        index={index}
+        slides={room.gallery.map((src) => ({ src }))}
+      />
     </div>
   );
 }

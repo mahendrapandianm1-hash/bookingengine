@@ -9,7 +9,7 @@ export default function RoomCard({
   image,
   amenities = [],
   gallery = [],
-  onSelect, // 🔥 ADD THIS
+  onSelect,
 }) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
@@ -21,7 +21,7 @@ export default function RoomCard({
     <>
       <div className="bg-white rounded-2xl shadow hover:shadow-lg transition flex flex-col md:flex-row overflow-hidden">
 
-        {/* Image */}
+        {/* IMAGE */}
         <div className="relative md:w-64">
           <img
             src={image}
@@ -33,7 +33,7 @@ export default function RoomCard({
             }}
           />
 
-          {/* Mini Gallery */}
+          {/* MINI GALLERY */}
           <div className="absolute bottom-2 left-2 flex gap-2">
             {previewImages.map((img, i) => (
               <img
@@ -61,7 +61,7 @@ export default function RoomCard({
           </div>
         </div>
 
-        {/* Content */}
+        {/* CONTENT */}
         <div className="p-6 flex flex-col flex-1 justify-between">
           <div>
             <h3 className="text-xl font-semibold">{title}</h3>
@@ -87,10 +87,9 @@ export default function RoomCard({
               <span className="text-sm text-gray-500"> / Night</span>
             </span>
 
-            {/* 🔥 IMPORTANT CHANGE */}
             <button
               onClick={() =>
-                onSelect?.({
+                onSelect({
                   title,
                   price,
                   guests,
@@ -108,13 +107,13 @@ export default function RoomCard({
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* LIGHTBOX */}
       {open && (
         <ImageLightbox
           images={gallery}
+          open={open}
           index={index}
-          setIndex={setIndex}
-          onClose={() => setOpen(false)}
+          close={() => setOpen(false)}
         />
       )}
     </>
