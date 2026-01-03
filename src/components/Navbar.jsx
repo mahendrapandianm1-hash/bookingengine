@@ -10,7 +10,7 @@ export const Navbar = () => {
                        ,{name:'Gallery',path:'/gallery'},{name:'Contact-Us',path:'/contactus'}];
   useEffect(()=>{
    if(location.pathname === '/')
-   {  
+   { 
     const handleScroll =()=>{
        setIsScrolled(window.scrollY > 10);
     };

@@ -68,96 +68,165 @@ export default function BookingPage() {
     : 0;
 
   return (
-    <div className="min-h-screen pt-20 md:pt-24 bg-gradient-to-b from-slate-100 via-slate-50 to-white">
+    <div className="min-h-screen pt-20 md:pt-13 bg-gradient-to-b from-slate-100 via-slate-50 to-white">
 
       {/* 🔍 HERO SEARCH SECTION */}
-      <div className="relative pt-16 pb-24 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-b">
+      <div className="relative pt-5 pb-24 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border-b">
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="max-w-6xl mx-auto px-4 md:px-6 relative z-10">
-          <div className="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-4 md:p-6 grid grid-cols-1 md:grid-cols-7 gap-4 items-end">
+           <h1 className="text-white text-6xl font-bold
+  tracking-tight
+  mt-4">
+        Find your next stay
+        </h1>
+<p className="mt-3 text-sm md:text-base text-gray-200">Search deals on Rooms...</p>
+          <div
+  className="
+    bg-white/95 backdrop-blur-md
+    rounded-3xl
+    shadow-[0_20px_40px_rgba(0,0,0,0.12)]
+    border border-gray-100
+    p-4 md:p-6
+    grid grid-cols-1 md:grid-cols-7
+    gap-4 items-end
+  "
+>
+  {/* Location */}
+  <div className="md:col-span-2">
+    <label className="block text-xs font-semibold text-gray-500 mb-1">
+      Location
+    </label>
+    <input
+      type="text"
+      placeholder="City, hotel, landmark"
+      value={location}
+      onChange={(e) => setLocation(e.target.value)}
+      className="
+        w-full rounded-xl border border-gray-200
+        px-4 py-3 text-sm
+        outline-none
+        focus:border-indigo-500
+        focus:ring-2 focus:ring-indigo-500/30
+      "
+    />
+  </div>
 
-            {/* Location */}
-            <div className="md:col-span-2">
-              <label className="block text-xs font-semibold text-gray-500 mb-1">
-                Location
-              </label>
-              <input
-                type="text"
-                placeholder="City, hotel, landmark"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-black outline-none"
-              />
-            </div>
+  {/* Check-in */}
+  <div>
+    <label className="block text-xs font-semibold text-gray-500 mb-1">
+      Check-in
+    </label>
+    <input
+      type="date"
+      value={checkIn}
+      onChange={(e) => setCheckIn(e.target.value)}
+      className="
+        w-full rounded-xl border border-gray-200
+        px-4 py-3 text-sm
+        outline-none
+        focus:border-indigo-500
+        focus:ring-2 focus:ring-indigo-500/30
+      "
+    />
+  </div>
 
-            {/* Check-in */}
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 mb-1">
-                Check-in
-              </label>
-              <input
-                type="date"
-                value={checkIn}
-                onChange={(e) => setCheckIn(e.target.value)}
-                className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-black outline-none"
-              />
-            </div>
+  {/* Check-out */}
+  <div>
+    <label className="block text-xs font-semibold text-gray-500 mb-1">
+      Check-out
+    </label>
+    <input
+      type="date"
+      value={checkOut}
+      onChange={(e) => setCheckOut(e.target.value)}
+      className="
+        w-full rounded-xl border border-gray-200
+        px-4 py-3 text-sm
+        outline-none
+        focus:border-indigo-500
+        focus:ring-2 focus:ring-indigo-500/30
+      "
+    />
+  </div>
 
-            {/* Check-out */}
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 mb-1">
-                Check-out
-              </label>
-              <input
-                type="date"
-                value={checkOut}
-                onChange={(e) => setCheckOut(e.target.value)}
-                className="w-full border rounded-xl px-4 py-3 focus:ring-2 focus:ring-black outline-none"
-              />
-            </div>
+  {/* Guests */}
+  <div>
+    <label className="block text-xs font-semibold text-gray-500 mb-1">
+      Guests
+    </label>
+    <select
+      value={guests}
+      onChange={(e) => setGuests(Number(e.target.value))}
+      className="
+        w-full rounded-xl border border-gray-200
+        px-4 py-3 text-sm bg-white
+        outline-none
+        focus:border-indigo-500
+        focus:ring-2 focus:ring-indigo-500/30
+      "
+    >
+      <option value="1">1 Guest</option>
+      <option value="2">2 Guests</option>
+      <option value="3">3 Guests</option>
+      <option value="4">4 Guests</option>
+    </select>
+  </div>
 
-            {/* Guests */}
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 mb-1">
-                Guests
-              </label>
-              <select
-                value={guests}
-                onChange={(e) => setGuests(Number(e.target.value))}
-                className="w-full border rounded-xl px-4 py-3 bg-white focus:ring-2 focus:ring-black outline-none"
-              >
-                <option value="1">1 Guest</option>
-                <option value="2">2 Guests</option>
-                <option value="3">3 Guests</option>
-                <option value="4">4 Guests</option>
-              </select>
-            </div>
+  {/* Rooms */}
+  {/*<div>
+    <label className="block text-xs font-semibold text-gray-500 mb-1">
+      Rooms
+    </label>
+    <select
+      value={roomCount}
+      onChange={(e) => setRoomCount(Number(e.target.value))}
+      className="
+        w-full rounded-xl border border-gray-200
+        px-4 py-3 text-sm bg-white
+        outline-none
+        focus:border-indigo-500
+        focus:ring-2 focus:ring-indigo-500/30
+      "
+    >
+      <option value="1">1 Room</option>
+      <option value="2">2 Rooms</option>
+      <option value="3">3 Rooms</option>
+      <option value="4">4 Rooms</option>
+    </select>
+  </div> */}
 
-            {/* Rooms */}
-            <div>
-              <label className="block text-xs font-semibold text-gray-500 mb-1">
-                Rooms
-              </label>
-              <select
-                value={roomCount}
-                onChange={(e) => setRoomCount(Number(e.target.value))}
-                className="w-full border rounded-xl px-4 py-3 bg-white focus:ring-2 focus:ring-black outline-none"
-              >
-                <option value="1">1 Room</option>
-                <option value="2">2 Rooms</option>
-                <option value="3">3 Rooms</option>
-                <option value="4">4 Rooms</option>
-              </select>
-            </div>
+  {/* Search Button */}
+  <div>
+    <button
+      className="
+       flex items-center justify-center gap-5
+      bg-black text-white
+      rounded-2xl px-8 py-4
+      font-semibold text-sm
+      hover:bg-gray-900
+      transition-all duration-200
+      shadow-lg shadow-indigo-600/30
+      lg:mt-auto
+      w-full lg:w-[220px]
+      "
+    >
+<svg
+      className="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+      />
+    </svg>
+    Check Availability
+    </button>
+  </div>
+</div>
 
-            {/* Search Button */}
-            <div>
-              <button className="w-full h-[52px] bg-black text-white rounded-xl font-semibold hover:bg-gray-900 transition">
-                Search
-              </button>
-            </div>
-
-          </div>
         </div>
       </div>
 
