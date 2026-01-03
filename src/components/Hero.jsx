@@ -1,8 +1,8 @@
 import React from "react";
-
+import HeroImage from "../assets/HeroSection.png";
 export const Hero = () => {
   return (
-    <div className='relative flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white h-screen bg-[url("http://localhost:3000/assets/HeroSection.png")] bg-no-repeat bg-cover bg-center'>
+    <div className='relative flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white h-screen  bg-no-repeat bg-cover bg-center' style={{ backgroundImage: `url(${HeroImage})` }}>
       
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40"></div>
