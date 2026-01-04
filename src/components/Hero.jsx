@@ -1,6 +1,8 @@
 import React from "react";
 import HeroImage from "../assets/HeroSection.png";
+import {useNavigate} from 'react-router-dom';
 export const Hero = () => {
+  const navigate = useNavigate();
   return (
     <div className='relative flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white min-h-screen  bg-no-repeat bg-cover bg-center' style={{ backgroundImage: `url(${HeroImage})` }}>
       
@@ -31,7 +33,7 @@ export const Hero = () => {
   rounded-3xl px-6 py-6
   flex flex-col lg:flex-row gap-5
   shadow-[0_15px_40px_rgba(79,70,229,0.25)] border border-gray-100
-">
+" onSubmit={()=>navigate('/room-info')}>
 
   {/* Destination */}
   <div className="flex-1 relative">

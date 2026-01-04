@@ -11,6 +11,7 @@ import BookingPage from './pages/BookingPage';
 import GuestDetailsPage from './pages/GuestDetailsPage';
 import PaymentPage from './pages/PaymentPage';
 import Login from './pages/Login';
+import Gallery from './components/Gallery';
 import {useLocation} from 'react-router-dom';
 function App() {
 const location = useLocation();
@@ -27,6 +28,7 @@ const location = useLocation();
           <Route path='/guest-info' element={<GuestDetailsPage />} />
           <Route path='/payment' element={<PaymentPage />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/gallery' element={<Gallery />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
